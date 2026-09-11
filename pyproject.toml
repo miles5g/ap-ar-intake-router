@@ -1,0 +1,18 @@
+[project]
+name = "apar-intake-router"
+version = "0.1.0"
+description = "Portfolio demo: synthetic multi-entity AP/AR intake → classify → route"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Miles Johnson" }]
+
+[project.scripts]
+apar-router = "apar_router.__main__:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["apar_router*"]

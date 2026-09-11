@@ -1,0 +1,19 @@
+doc_id,kind,entity_hint,counterparty,invoice_number,amount,currency,doc_date,due_date,po_number,description
+DOC-001,customer_invoice,Northwind Retail LLC,Lakeside Market Group,INV-NW-4412,12850.00,USD,2026-08-15,2026-09-14,SO-4412,Open AR — September merchandising
+DOC-002,vendor_invoice,Northwind Retail LLC,Pinecone Office Supply Co.,INV-PN-874,875.00,USD,2026-09-02,2026-10-02,,Store supplies — no PO on file
+DOC-003,vendor_invoice,Cedar Grove Holdings,Atlas Freight Partners,INV-AT-2201,4320.00,USD,2026-08-28,2026-09-27,PO-CG-8891,Inbound freight — holding company
+DOC-004,vendor_invoice,Cedar Grove,Atlas Freight Partners,INV-AT-2201,4320.00,USD,2026-08-28,2026-09-27,PO-CG-8891,Resubmitted freight invoice (same number)
+DOC-005,vendor_invoice,Harbor Point Logistics,Silver Oak Utilities,INV-SO-3104,2100.00,USD,2026-07-20,2026-08-28,PO-HP-552,Yard utilities — past due
+DOC-006,vendor_invoice,Maple Street Properties,Redwood Facilities Group,INV-RW-5501,45000.00,USD,2026-08-01,2026-09-30,PO-MS-1044,Roof replacement — Building C
+DOC-007,vendor_invoice,Blue Ridge Wholesale,Horizon Packaging Inc.,INV-HZ-1802,1560.00,USD,2026-09-04,2026-10-04,PO-BR-220,Corrugated cartons — standard
+DOC-008,customer_invoice,Blue Ridge Wholesale,Ironwood Distributors,INV-BR-1810,8900.00,USD,2026-08-18,2026-09-17,SO-1810,Wholesale shipment — August
+DOC-009,vendor_invoice,,Pinecone Office Supply Co.,INV-PN-999,640.00,USD,2026-09-07,2026-10-07,PO-??-000,Invoice with blank entity hint
+DOC-010,vendor_invoice,Northwind Retail LLC,QZ Miscellaneous LLC,INV-QZ-4420,320.00,USD,2026-09-05,2026-10-05,,Unknown vendor — below PO threshold
+DOC-011,customer_invoice,Harbor Point,Prairie View Grocers,INV-HP-3110,5400.00,USD,2026-08-20,2026-09-19,SO-3110,Drayage billed to grocer
+DOC-012,customer_invoice,Maple Street Properties,Coastal Shelf Stores,INV-MS-5512,22000.00,USD,2026-06-30,2026-07-15,SO-5512,CAM recovery — severely past due
+DOC-013,vendor_invoice,CGH,Atlas Freight Partners,INV-AT-2210,990.00,USD,2026-09-01,2026-09-30,PO-CG-8902,Alias entity hint CGH
+DOC-014,credit_memo,Northwind Retail LLC,Pinecone Office Supply Co.,CM-NW-4425,150.00,USD,2026-09-08,2026-09-08,PO-NW-331,Vendor credit — overshipment return
+DOC-015,vendor_invoice,Blue Ridge Wholesale,Horizon Packaging Inc.,INV-HZ-1822,12500.00,USD,2026-09-06,2026-09-13,,Rush packaging — missing PO and due soon
+DOC-016,vendor_invoice,Harbor Point Logistics,Atlas Freight Partners,INV-AT-3120,780.00,USD,2026-09-08,2026-11-15,PO-HP-610,Future-dated linehaul
+DOC-017,customer_invoice,Cedar Grove Holdings,Lakeside Market Group,INV-CG-2222,3000.00,USD,2026-08-25,2026-09-24,SO-2222,Intercompany-style bill to Lakeside
+DOC-018,vendor_invoice,Unknown Division West,Silver Oak Utilities,INV-SO-8801,18500.00,USD,2026-09-03,2026-09-20,PO-XX-1,High-dollar invoice on an unknown entity
