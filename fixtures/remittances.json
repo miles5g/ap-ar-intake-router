@@ -1,0 +1,82 @@
+{
+  "note": "Synthetic remittances only. Fictional payers and invoice references.",
+  "remittances": [
+    {
+      "doc_id": "RMT-1001",
+      "entity_hint": "Northwind Retail LLC",
+      "payer": "Lakeside Market Group",
+      "amount": "12850.00",
+      "currency": "USD",
+      "payment_date": "2026-09-08",
+      "invoice_ref": "INV-NW-4412",
+      "applied_amount": "12850.00",
+      "description": "ACH remittance matching INV-NW-4412"
+    },
+    {
+      "doc_id": "RMT-1002",
+      "entity_hint": "Blue Ridge Wholesale",
+      "payer": "Ironwood Distributors",
+      "amount": "8900.00",
+      "currency": "USD",
+      "payment_date": "2026-09-09",
+      "invoice_ref": "INV-BR-1810",
+      "applied_amount": "8900.00",
+      "description": "Check remittance matching INV-BR-1810"
+    },
+    {
+      "doc_id": "RMT-1003",
+      "entity_hint": "Harbor Point Logistics",
+      "payer": "Prairie View Grocers",
+      "amount": "5100.00",
+      "currency": "USD",
+      "payment_date": "2026-09-10",
+      "invoice_ref": "INV-HP-3110",
+      "applied_amount": "5100.00",
+      "description": "Short pay against INV-HP-3110"
+    },
+    {
+      "doc_id": "RMT-1004",
+      "entity_hint": "Northwind Retail LLC",
+      "payer": "Lakeside Market Group",
+      "amount": "2500.00",
+      "currency": "USD",
+      "payment_date": "2026-09-10",
+      "invoice_ref": "INV-NW-0000",
+      "applied_amount": "2500.00",
+      "description": "Invoice reference not in the open batch"
+    },
+    {
+      "doc_id": "RMT-1005",
+      "entity_hint": "Maple Street Properties",
+      "payer": "Coastal Shelf Stores",
+      "amount": "23000.00",
+      "currency": "USD",
+      "payment_date": "2026-09-07",
+      "invoice_ref": "INV-MS-5512",
+      "applied_amount": "23000.00",
+      "description": "Overpayment against INV-MS-5512"
+    },
+    {
+      "doc_id": "RMT-1006",
+      "entity_hint": "Blue Ridge Wholesale",
+      "payer": "Ironwood Distributors",
+      "amount": "400.00",
+      "currency": "USD",
+      "payment_date": "2026-09-11",
+      "invoice_ref": "",
+      "applied_amount": "",
+      "description": "Unapplied cash — no remittance advice"
+    },
+    {
+      "doc_id": "RMT-1007",
+      "entity_hint": "Cedar Grove Holdings",
+      "payer": "Lakeside Market Group",
+      "amount": "3000.00",
+      "currency": "USD",
+      "payment_date": "2026-09-09",
+      "invoice_ref": "INV-CG-2222",
+      "applied_amount": "2750.00",
+      "description": "Remittance total disagrees with applied amount"
+    }
+  ]
+}

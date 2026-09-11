@@ -1,0 +1,48 @@
+{
+  "note": "Fictional legal entities and counterparties for the portfolio demo. Not real firms.",
+  "entities": [
+    {
+      "id": "ENT-NWR",
+      "legal_name": "Northwind Retail LLC",
+      "aliases": ["Northwind", "Northwind Retail", "NWR"],
+      "role": "operating"
+    },
+    {
+      "id": "ENT-CGH",
+      "legal_name": "Cedar Grove Holdings",
+      "aliases": ["Cedar Grove", "CGH"],
+      "role": "holding"
+    },
+    {
+      "id": "ENT-HPL",
+      "legal_name": "Harbor Point Logistics",
+      "aliases": ["Harbor Point", "HPL"],
+      "role": "operating"
+    },
+    {
+      "id": "ENT-MSP",
+      "legal_name": "Maple Street Properties",
+      "aliases": ["Maple Street", "MSP"],
+      "role": "operating"
+    },
+    {
+      "id": "ENT-BRW",
+      "legal_name": "Blue Ridge Wholesale",
+      "aliases": ["Blue Ridge", "BRW"],
+      "role": "operating"
+    }
+  ],
+  "vendors": [
+    "Pinecone Office Supply Co.",
+    "Atlas Freight Partners",
+    "Silver Oak Utilities",
+    "Redwood Facilities Group",
+    "Horizon Packaging Inc."
+  ],
+  "customers": [
+    "Lakeside Market Group",
+    "Ironwood Distributors",
+    "Prairie View Grocers",
+    "Coastal Shelf Stores"
+  ]
+}
