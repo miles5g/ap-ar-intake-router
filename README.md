@@ -94,6 +94,18 @@ The bundled batch is intentionally messy so the report is interesting:
 
 Edit `fixtures/` and rerun the module to see routing change.
 
+On the bundled batch (`--as-of 2026-09-11`) the demo routes **25 documents** like this:
+
+| Queue | Count | What you should see |
+| --- | ---: | --- |
+| `URGENT_ESCALATION` | 2 | Severely past-due AR; high-dollar unknown entity |
+| `ENTITY_REVIEW` | 1 | Blank entity hint |
+| `AP_EXCEPTION` | 6 | Duplicates, missing PO, unknown vendor, past-due AP |
+| `AR_UNAPPLIED_CASH` | 5 | Short pay, overpay, variance, unmatched / no advice |
+| `AP_PROCESS` | 5 | Clean vendor invoices and the credit memo |
+| `AR_CASH_APPLICATION` | 2 | Remittances that tie to open invoices |
+| `AR_OPEN_ITEMS` | 4 | Clean customer invoices still waiting on cash |
+
 ## What this is not
 
 - Not OCR, not email intake, not an ERP connector

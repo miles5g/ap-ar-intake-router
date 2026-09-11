@@ -9,7 +9,6 @@ from decimal import Decimal
 from apar_router.catalog import known_counterparty, resolve_entity
 from apar_router.models import (
     EXCEPTION_PRIORITY,
-    URGENCY_RANK,
     Catalog,
     Classification,
     DocKind,
@@ -48,7 +47,7 @@ def _norm_eq(left: str, right: str) -> bool:
 
 
 def _days_past_due(doc: SourceDocument, as_of: date) -> int | None:
-    if doc.kind is DocKind.REMITTANCE or doc.due_date is None:
+    if doc.kind in {DocKind.REMITTANCE, DocKind.CREDIT_MEMO} or doc.due_date is None:
         return None
     return (as_of - doc.due_date).days
 
@@ -221,7 +220,3 @@ def classify_documents(
             )
         )
     return classified
-
-
-def max_urgency(*values: Urgency) -> Urgency:
-    return max(values, key=lambda item: URGENCY_RANK[item])

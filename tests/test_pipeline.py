@@ -108,6 +108,12 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(ap.classification.exception_type, ExceptionType.NONE)
         self.assertEqual(ap.routing.queue, Queue.AP_PROCESS)
 
+        credit = self.items["DOC-014"]
+        self.assertEqual(credit.document.kind.value, "credit_memo")
+        self.assertEqual(credit.classification.exception_type, ExceptionType.NONE)
+        self.assertEqual(credit.classification.urgency, Urgency.LOW)
+        self.assertEqual(credit.routing.queue, Queue.AP_PROCESS)
+
         ar = self.items["DOC-008"]
         self.assertEqual(ar.classification.side, Side.AR)
         self.assertEqual(ar.routing.queue, Queue.AR_OPEN_ITEMS)
