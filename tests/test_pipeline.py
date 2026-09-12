@@ -29,7 +29,13 @@ class PipelineTests(unittest.TestCase):
         cls.items = _by_id(cls.result)
 
     def test_fixture_files_exist(self):
-        for name in ("entities.json", "invoices.csv", "remittances.json"):
+        for name in (
+            "entities.json",
+            "invoices.csv",
+            "remittances.json",
+            "coa.json",
+            "recurring_bills.csv",
+        ):
             self.assertTrue((DEFAULT_FIXTURES / name).is_file(), name)
 
     def test_ingest_count(self):
@@ -132,6 +138,7 @@ class PipelineTests(unittest.TestCase):
             "Exception mix",
             "By entity",
             "Routed work",
+            "Journal pack",
             "Northwind Retail LLC",
             "Cedar Grove Holdings",
             "`URGENT_ESCALATION`",
@@ -156,7 +163,10 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(completed.returncode, 0, completed.stderr)
         self.assertIn("AP/AR Intake Triage Report", completed.stdout)
         self.assertIn("RMT-1001", completed.stdout)
+        self.assertIn("Journal pack", completed.stdout)
         self.assertNotIn("Gursey", completed.stdout)
+        for token in ("kpmg", "deloitte", "pwc"):
+            self.assertNotIn(token, completed.stdout.lower())
 
 
 if __name__ == "__main__":
