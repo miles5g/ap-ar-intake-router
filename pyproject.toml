@@ -1,7 +1,7 @@
 [project]
 name = "apar-intake-router"
-version = "0.1.0"
-description = "Portfolio demo: synthetic multi-entity AP/AR intake → classify → route"
+version = "0.2.0"
+description = "Portfolio demo: synthetic multi-entity AP/AR intake → classify → route → journal pack"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

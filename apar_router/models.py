@@ -151,3 +151,51 @@ class PipelineResult:
     as_of: date
     items: list[TriageItem]
     source_label: str
+
+
+@dataclass(frozen=True)
+class GlAccount:
+    code: str
+    name: str
+    type: str
+
+
+@dataclass(frozen=True)
+class ChartOfAccounts:
+    accounts: tuple[GlAccount, ...]
+    control_accounts: dict[str, str]
+    vendor_gl: dict[str, str]
+    customer_gl: str
+    fallback_expense_gl: str
+
+    def by_code(self) -> dict[str, GlAccount]:
+        return {account.code: account for account in self.accounts}
+
+
+@dataclass(frozen=True)
+class JournalLine:
+    gl_code: str
+    debit: Decimal
+    credit: Decimal
+    description: str
+
+
+@dataclass
+class Journal:
+    entity_id: str
+    entity_name: str
+    side: Side
+    lines: list[JournalLine]
+    filename: str
+
+
+@dataclass(frozen=True)
+class BillControlRow:
+    vendor: str
+    entity_name: str
+    occurrences: int
+    typical_amount: Decimal
+    due_day_pattern: str
+    cadence: str
+    last_document: str
+    last_date: date
