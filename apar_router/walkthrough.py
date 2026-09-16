@@ -52,9 +52,9 @@ def render_box(lines: Sequence[str], width: int = BOX_WIDTH) -> str:
 
 def intro_lines() -> list[str]:
     return [
-        "SYNTHETIC DEMO — fictional entities, dummy D-#### GLs. Not production.",
-        "You're seeing a portfolio AP/AR router: fixtures in, queues + journals out.",
-        "Talk track: Recruiter-safe pattern. No live books, no employer SOP.",
+        "SYNTHETIC DEMO — fake companies, dummy D-#### GLs. Not real books.",
+        "This is me walking a batch from invoices in to a journal pack.",
+        "Talk track: All fake data. No live books, no employer SOP.",
     ]
 
 
@@ -62,9 +62,9 @@ def ingest_lines(*, documents: Sequence[SourceDocument], **_: object) -> list[st
     remits = sum(1 for doc in documents if doc.kind is DocKind.REMITTANCE)
     invoices = len(documents) - remits
     return [
-        "INGEST — synthetic CSV invoices/credits + JSON remittances.",
-        f"You're seeing {len(documents)} docs: {invoices} invoice/credit rows + {remits} remittances.",
-        "Talk track: Normalize intake first; classify once the shapes are boring.",
+        "INGEST — fake invoices/credits from a CSV, remittances from JSON.",
+        f"That's {len(documents)} docs: {invoices} invoice/credit rows and {remits} remittances.",
+        "Talk track: I'm just loading the pile so we can look at it.",
     ]
 
 
@@ -79,9 +79,9 @@ def classify_lines(
         1 for _, clf in classified if clf.exception_type is not ExceptionType.NONE
     )
     return [
-        "CLASSIFY — AP vs AR, entity, urgency, one winning exception per doc.",
-        f"You're seeing {ap} AP / {ar} AR, {flagged} flagged (dupes, short-pays, blank entity).",
-        "Talk track: Deterministic rules you can defend — not a model.",
+        "CLASSIFY — AP vs AR, which company, and did anything look off.",
+        f"That's {ap} AP / {ar} AR, {flagged} with a flag (dupes, short-pays, blank entity).",
+        "Talk track: I'm tagging the messy ones as I go.",
     ]
 
 
@@ -89,17 +89,17 @@ def route_lines(*, items: Sequence[TriageItem], **_: object) -> list[str]:
     queues = Counter(item.routing.queue for item in items)
     urgent = queues.get(Queue.URGENT_ESCALATION, 0)
     return [
-        "ROUTE — queue + RC-* reason code, hottest work first.",
-        f"You're seeing {urgent} urgent escalations, {len(queues)} queues, {len(items)} routed items.",
-        "Talk track: Show the exception pile; clean AP/AR can wait in process queues.",
+        "ROUTE — each doc gets a queue and a short reason code.",
+        f"That's {urgent} that need a person now, {len(items)} items in {len(queues)} queues.",
+        "Talk track: I'm sorting what needs a human vs what can wait.",
     ]
 
 
 def report_lines(**_: object) -> list[str]:
     return [
-        "REPORT — markdown: queues, exceptions, entities, routed work.",
-        "You're seeing a controller-style packet — still fully synthetic names.",
-        "Talk track: If they only read one screen, this is the screen.",
+        "REPORT — queues, exceptions, entities, the whole list.",
+        "Same fake names as the fixtures. Nothing fancy.",
+        "Talk track: This is the summary screen.",
     ]
 
 
@@ -110,9 +110,9 @@ def journals_lines(
 ) -> list[str]:
     count = len(journals or ())
     return [
-        "JOURNALS — dummy-GL CSVs + bill-control for recurring fictional vendors.",
-        f"You're seeing {count} balanced packs under output/journals/ (whole dollars).",
-        "Talk track: Intake that emits a scrubbed pack — not an ERP post.",
+        "JOURNALS — dummy-GL CSVs plus a little recurring-bill list.",
+        f"That's {count} balanced files under output/journals/.",
+        "Talk track: Journals balance — still not a real post.",
     ]
 
 

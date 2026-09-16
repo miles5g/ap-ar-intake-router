@@ -77,6 +77,16 @@ class BoxTests(unittest.TestCase):
             lowered = joined.lower()
             for token in FORBIDDEN_TOKENS:
                 self.assertNotIn(token, lowered)
+            for phrase in (
+                "shapes are boring",
+                "hottest work",
+                "controller-style",
+                "deterministic",
+                "recruiter-safe",
+                "exception pile",
+                "scrubbed pack",
+            ):
+                self.assertNotIn(phrase, lowered, phrase)
 
 
 class WalkthroughPresenterTests(unittest.TestCase):
@@ -137,7 +147,10 @@ class WalkthroughCliTests(unittest.TestCase):
             for marker in STAGE_MARKERS:
                 self.assertIn(marker, banners, marker)
             self.assertIn("Talk track:", banners)
-            self.assertIn("You're seeing", banners)
+            self.assertIn("All fake data.", banners)
+            self.assertIn("I'm sorting what needs a human vs what can wait.", banners)
+            self.assertIn("This is the summary screen.", banners)
+            self.assertIn("Journals balance — still not a real post.", banners)
             self.assertIn("no employer sop", banners.lower())
             self.assertNotIn("Press Enter", banners)
             self.assertIn("AP/AR Intake Triage Report", completed.stdout)
