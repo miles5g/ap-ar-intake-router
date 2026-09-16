@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from datetime import date
 from pathlib import Path
 
@@ -34,6 +35,8 @@ def _source_label(fixtures: Path) -> str:
 def run_pipeline(
     fixtures_dir: Path | None = None,
     as_of: date | None = None,
+    *,
+    on_stage: Callable[..., None] | None = None,
 ) -> PipelineResult:
     fixtures = Path(fixtures_dir) if fixtures_dir else DEFAULT_FIXTURES
     for name in (
@@ -48,13 +51,20 @@ def run_pipeline(
             scan_text(path.read_text(encoding="utf-8"), source=str(path))
     catalog = load_catalog(fixtures / "entities.json")
     documents = load_documents(fixtures)
+    if on_stage is not None:
+        on_stage("ingest", documents=documents, fixtures=fixtures)
     classified = classify_documents(documents, catalog, as_of or date.today())
+    if on_stage is not None:
+        on_stage("classify", classified=classified)
     items = build_triage(classified)
-    return PipelineResult(
+    result = PipelineResult(
         as_of=as_of or date.today(),
         items=items,
         source_label=_source_label(fixtures),
     )
+    if on_stage is not None:
+        on_stage("route", result=result, items=items)
+    return result
 
 
 def build_pack(
