@@ -49,7 +49,7 @@ class BoxTests(unittest.TestCase):
             render_box(classify_lines(classified=classified)),
             render_box(route_lines(items=result.items)),
             render_box(report_lines()),
-            render_box(journals_lines(journals=[], output_dir=Path("output"))),
+            render_box(journals_lines(journals=[])),
         ]
         for box in boxes:
             content_rows = [row for row in box.splitlines() if row.startswith("|")]
@@ -66,7 +66,7 @@ class BoxTests(unittest.TestCase):
             classify_lines(classified=classified),
             route_lines(items=result.items),
             report_lines(),
-            journals_lines(journals=[], output_dir=Path("output")),
+            journals_lines(journals=[]),
         ]
         for lines in blobs:
             self.assertGreaterEqual(len(lines), 2, lines)
@@ -138,7 +138,7 @@ class WalkthroughCliTests(unittest.TestCase):
                 self.assertIn(marker, banners, marker)
             self.assertIn("Talk track:", banners)
             self.assertIn("You're seeing", banners)
-            self.assertIn("no employer SOP", banners.lower())
+            self.assertIn("no employer sop", banners.lower())
             self.assertNotIn("Press Enter", banners)
             self.assertIn("AP/AR Intake Triage Report", completed.stdout)
             self.assertIn("Journal pack", completed.stdout)

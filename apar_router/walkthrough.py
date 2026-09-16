@@ -5,7 +5,6 @@ from __future__ import annotations
 import sys
 from collections import Counter
 from collections.abc import Sequence
-from pathlib import Path
 from typing import TextIO
 
 from apar_router.models import (
@@ -19,7 +18,7 @@ from apar_router.models import (
     TriageItem,
 )
 
-BOX_WIDTH = 72
+BOX_WIDTH = 80
 
 
 def wrap_line(text: str, width: int) -> list[str]:
@@ -54,7 +53,7 @@ def render_box(lines: Sequence[str], width: int = BOX_WIDTH) -> str:
 def intro_lines() -> list[str]:
     return [
         "SYNTHETIC DEMO — fictional entities, dummy D-#### GLs. Not production.",
-        "You're seeing a portfolio AP/AR router: fixtures in, queues and journals out.",
+        "You're seeing a portfolio AP/AR router: fixtures in, queues + journals out.",
         "Talk track: Recruiter-safe pattern. No live books, no employer SOP.",
     ]
 
@@ -65,7 +64,7 @@ def ingest_lines(*, documents: Sequence[SourceDocument], **_: object) -> list[st
     return [
         "INGEST — synthetic CSV invoices/credits + JSON remittances.",
         f"You're seeing {len(documents)} docs: {invoices} invoice/credit rows + {remits} remittances.",
-        "Talk track: Normalize intake first; classify only when the shapes are boring.",
+        "Talk track: Normalize intake first; classify once the shapes are boring.",
     ]
 
 
@@ -82,7 +81,7 @@ def classify_lines(
     return [
         "CLASSIFY — AP vs AR, entity, urgency, one winning exception per doc.",
         f"You're seeing {ap} AP / {ar} AR, {flagged} flagged (dupes, short-pays, blank entity).",
-        "Talk track: Deterministic rules with a reason you can defend — not a model.",
+        "Talk track: Deterministic rules you can defend — not a model.",
     ]
 
 
@@ -107,14 +106,12 @@ def report_lines(**_: object) -> list[str]:
 def journals_lines(
     *,
     journals: Sequence[Journal] | None = None,
-    output_dir: Path | None = None,
     **_: object,
 ) -> list[str]:
     count = len(journals or ())
-    where = output_dir.name if output_dir is not None else "output"
     return [
         "JOURNALS — dummy-GL CSVs + bill-control for recurring fictional vendors.",
-        f"You're seeing {count} balanced packs under {where}/journals/ (whole dollars).",
+        f"You're seeing {count} balanced packs under output/journals/ (whole dollars).",
         "Talk track: Intake that emits a scrubbed pack — not an ERP post.",
     ]
 
