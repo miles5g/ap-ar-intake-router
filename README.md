@@ -1,13 +1,13 @@
 # AP/AR Intake Router
 
-**30-second demo**
+**30-second demo** (from the repo root; Python 3.10+, stdlib only — no pip install)
 
 ```bash
 python3 -m apar_router
 python3 -m unittest discover -s tests -v
 ```
 
-Prints a triage report and writes balanced dummy-GL journals + bill-control CSV under `output/`. Stdlib Python only.
+Prints a triage report and writes balanced dummy-GL journals + bill-control CSV under `output/`.
 
 ---
 
@@ -37,6 +37,7 @@ Recruiter-safe ops automation pattern. **Not** production software, **not** an E
 git clone https://github.com/miles5g/ap-ar-intake-router.git
 cd ap-ar-intake-router
 python3 -m apar_router
+python3 -m unittest discover -s tests -v
 ```
 
 ## Status

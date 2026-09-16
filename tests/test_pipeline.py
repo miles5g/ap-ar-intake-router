@@ -164,6 +164,10 @@ class PipelineTests(unittest.TestCase):
         self.assertIn("AP/AR Intake Triage Report", completed.stdout)
         self.assertIn("RMT-1001", completed.stdout)
         self.assertIn("Journal pack", completed.stdout)
+        self.assertIn("`output/journals/`", completed.stdout)
+        self.assertIn("python3 -m apar_router", completed.stdout)
+        self.assertNotIn(str(REPO_ROOT), completed.stdout)
+        self.assertIn("under output/", completed.stderr)
         self.assertNotIn("Gursey", completed.stdout)
         for token in ("kpmg", "deloitte", "pwc"):
             self.assertNotIn(token, completed.stdout.lower())
