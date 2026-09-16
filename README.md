@@ -9,6 +9,15 @@ python3 -m unittest discover -s tests -v
 
 Prints a triage report and writes balanced dummy-GL journals + bill-control CSV under `output/`.
 
+**Interview walkthrough** — same pipeline, with short boxed banners between ingest → classify → route → report → journals (synthetic reminder first; Enter to continue).
+
+```bash
+python3 -m apar_router --walkthrough
+python3 -m apar_router --walkthrough --no-pause
+```
+
+`--no-pause` skips the Enter prompts (CI / non-interactive). Default mode stays the fast 30-second demo.
+
 ---
 
 **Portfolio demo** — intake → classify → route → journal pack for multi-entity AP/AR.
@@ -37,12 +46,13 @@ Recruiter-safe ops automation pattern. **Not** production software, **not** an E
 git clone https://github.com/miles5g/ap-ar-intake-router.git
 cd ap-ar-intake-router
 python3 -m apar_router
+python3 -m apar_router --walkthrough
 python3 -m unittest discover -s tests -v
 ```
 
 ## Status
 
-Runnable. Tests cover routing, journal balance, and scrub guards.
+Runnable. Tests cover routing, journal balance, scrub guards, and walkthrough `--no-pause`.
 
 ## Author
 
