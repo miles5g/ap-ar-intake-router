@@ -8,11 +8,12 @@ from datetime import date
 from pathlib import Path
 
 from apar_router.pipeline import DEFAULT_FIXTURES, DEFAULT_OUTPUT, run_and_export
+from apar_router.report import format_output_label
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="python -m apar_router",
+        prog="python3 -m apar_router",
         description=(
             "Ingest synthetic multi-entity invoices/remittances, classify them, "
             "route to queues, print a markdown triage report, and write a "
@@ -64,7 +65,9 @@ def main(argv: list[str] | None = None) -> int:
         )
     journal_count = sum(1 for path in written if path.parent.name == "journals")
     sys.stderr.write(
-        f"Wrote {len(written)} pack files ({journal_count} journals) under {args.output_dir}/\n"
+        "Wrote "
+        f"{len(written)} pack files ({journal_count} journals) under "
+        f"{format_output_label(args.output_dir, suffix='')}\n"
     )
     return 0
 

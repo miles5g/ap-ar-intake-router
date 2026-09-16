@@ -23,6 +23,7 @@ from apar_router.coa import DUMMY_PREFIX, CoaError, load_coa
 from apar_router.export import write_pack
 from apar_router.journal import JOURNAL_COLUMNS, build_journals, journal_totals, whole_dollars
 from apar_router.pipeline import DEFAULT_FIXTURES, run_and_export, run_pipeline
+from apar_router.report import format_output_label
 from apar_router.safety import FORBIDDEN_TOKENS, SafetyError, scan_text
 
 AS_OF = date(2026, 9, 11)
@@ -162,6 +163,7 @@ class JournalPackTests(unittest.TestCase):
             self.assertEqual(completed.returncode, 0, completed.stderr)
             self.assertIn("AP/AR Intake Triage Report", completed.stdout)
             self.assertIn("Journal pack", completed.stdout)
+            self.assertIn("python3 -m apar_router", completed.stdout)
             self.assertTrue((output / "triage_report.md").is_file())
             self.assertTrue((output / "bill_control.csv").is_file())
             self.assertTrue((output / "journals" / "ENT-NWR_AP.csv").is_file())
@@ -173,6 +175,17 @@ class JournalPackTests(unittest.TestCase):
             )
             self.assertIn("Journal pack", report)
             self.assertTrue(written)
+
+    def test_default_output_label_is_repo_relative(self):
+        self.assertEqual(format_output_label(None), "output/journals/")
+        self.assertEqual(
+            format_output_label(REPO_ROOT / "output", suffix=""),
+            "output/",
+        )
+        self.assertEqual(
+            format_output_label(REPO_ROOT / "output"),
+            "output/journals/",
+        )
 
 
 class ScrubGuardTests(unittest.TestCase):
