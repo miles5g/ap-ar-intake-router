@@ -57,7 +57,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--walkthrough",
         action="store_true",
         help=(
-            "Interview mode: boxed stage banners between ingest → classify → "
+            "Walkthrough demo: boxed stage banners between ingest → classify → "
             "route → report → journals (pauses for Enter unless --no-pause)."
         ),
     )

@@ -1,4 +1,4 @@
-"""Interview walkthrough banners and --no-pause CLI checks."""
+"""Walkthrough banners and --no-pause CLI checks."""
 
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ STAGE_MARKERS = ("SYNTHETIC DEMO", "INGEST", "CLASSIFY", "ROUTE", "REPORT", "JOU
 
 class BoxTests(unittest.TestCase):
     def test_render_box_wraps_content(self):
-        text = render_box(["INGEST — hello", "Talk track: keep it short."])
+        text = render_box(["INGEST — hello", "Loads the pile."])
         self.assertIn("INGEST — hello", text)
         self.assertTrue(text.startswith("+"))
         self.assertTrue(text.endswith("+"))
@@ -72,12 +72,15 @@ class BoxTests(unittest.TestCase):
             self.assertGreaterEqual(len(lines), 2, lines)
             self.assertLessEqual(len(lines), 4, lines)
             joined = "\n".join(lines)
-            self.assertIn("Talk track:", joined)
             scan_text(joined, source="walkthrough copy")
             lowered = joined.lower()
             for token in FORBIDDEN_TOKENS:
                 self.assertNotIn(token, lowered)
             for phrase in (
+                "talk track",
+                "interview",
+                "say this",
+                "say in interview",
                 "shapes are boring",
                 "hottest work",
                 "controller-style",
@@ -97,7 +100,8 @@ class WalkthroughPresenterTests(unittest.TestCase):
         guide.intro()
         out = stderr.getvalue()
         self.assertIn("SYNTHETIC DEMO", out)
-        self.assertIn("Talk track:", out)
+        self.assertIn("All fake data.", out)
+        self.assertNotIn("Talk track:", out)
         self.assertNotIn("Press Enter", out)
         self.assertEqual(stdin.read(), "")
 
@@ -121,6 +125,10 @@ class WalkthroughCliTests(unittest.TestCase):
         default = parser.parse_args([])
         self.assertFalse(default.walkthrough)
         self.assertFalse(default.no_pause)
+        help_text = parser.format_help().lower()
+        self.assertIn("walkthrough", help_text)
+        self.assertNotIn("interview", help_text)
+        self.assertNotIn("talk track", help_text)
 
     def test_walkthrough_no_pause(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -146,10 +154,13 @@ class WalkthroughCliTests(unittest.TestCase):
             banners = completed.stderr
             for marker in STAGE_MARKERS:
                 self.assertIn(marker, banners, marker)
-            self.assertIn("Talk track:", banners)
+            self.assertNotIn("Talk track:", banners)
+            self.assertNotIn("interview", banners.lower())
             self.assertIn("All fake data.", banners)
-            self.assertIn("I'm sorting what needs a human vs what can wait.", banners)
-            self.assertIn("This is the summary screen.", banners)
+            self.assertIn("Loads the pile so the later stages have something to sort.", banners)
+            self.assertIn("Tags each doc and keeps the messy flags on it.", banners)
+            self.assertIn("Sorts what needs a human now from what can wait.", banners)
+            self.assertIn("Prints the triage summary for this batch.", banners)
             self.assertIn("Journals balance — still not a real post.", banners)
             self.assertIn("no employer sop", banners.lower())
             self.assertNotIn("Press Enter", banners)
