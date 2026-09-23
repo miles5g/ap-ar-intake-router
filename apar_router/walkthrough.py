@@ -1,4 +1,4 @@
-"""Interview-mode stage banners for the synthetic AP/AR CLI demo."""
+"""Stage banners for the synthetic AP/AR CLI walkthrough."""
 
 from __future__ import annotations
 
@@ -53,8 +53,8 @@ def render_box(lines: Sequence[str], width: int = BOX_WIDTH) -> str:
 def intro_lines() -> list[str]:
     return [
         "SYNTHETIC DEMO — fake companies, dummy D-#### GLs. Not real books.",
-        "This is me walking a batch from invoices in to a journal pack.",
-        "Talk track: All fake data. No live books, no employer SOP.",
+        "One batch goes from invoices in to a journal pack.",
+        "All fake data. No live books, no employer SOP.",
     ]
 
 
@@ -64,7 +64,7 @@ def ingest_lines(*, documents: Sequence[SourceDocument], **_: object) -> list[st
     return [
         "INGEST — fake invoices/credits from a CSV, remittances from JSON.",
         f"That's {len(documents)} docs: {invoices} invoice/credit rows and {remits} remittances.",
-        "Talk track: I'm just loading the pile so we can look at it.",
+        "Loads the pile so the later stages have something to sort.",
     ]
 
 
@@ -81,7 +81,7 @@ def classify_lines(
     return [
         "CLASSIFY — AP vs AR, which company, and did anything look off.",
         f"That's {ap} AP / {ar} AR, {flagged} with a flag (dupes, short-pays, blank entity).",
-        "Talk track: I'm tagging the messy ones as I go.",
+        "Tags each doc and keeps the messy flags on it.",
     ]
 
 
@@ -91,7 +91,7 @@ def route_lines(*, items: Sequence[TriageItem], **_: object) -> list[str]:
     return [
         "ROUTE — each doc gets a queue and a short reason code.",
         f"That's {urgent} that need a person now, {len(items)} items in {len(queues)} queues.",
-        "Talk track: I'm sorting what needs a human vs what can wait.",
+        "Sorts what needs a human now from what can wait.",
     ]
 
 
@@ -99,7 +99,7 @@ def report_lines(**_: object) -> list[str]:
     return [
         "REPORT — queues, exceptions, entities, the whole list.",
         "Same fake names as the fixtures. Nothing fancy.",
-        "Talk track: This is the summary screen.",
+        "Prints the triage summary for this batch.",
     ]
 
 
@@ -112,7 +112,7 @@ def journals_lines(
     return [
         "JOURNALS — dummy-GL CSVs plus a little recurring-bill list.",
         f"That's {count} balanced files under output/journals/.",
-        "Talk track: Journals balance — still not a real post.",
+        "Journals balance — still not a real post.",
     ]
 
 

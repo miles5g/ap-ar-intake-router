@@ -9,7 +9,7 @@ python3 -m unittest discover -s tests -v
 
 Prints a triage report and writes balanced dummy-GL journals + bill-control CSV under `output/`.
 
-**Interview walkthrough** — same pipeline, with short boxed banners between ingest → classify → route → report → journals (synthetic reminder first; Enter to continue).
+**Stepped walkthrough** — same pipeline, with a short boxed banner before each stage (ingest, classify, route, report, journals). The opening banner says the companies and GLs are fake. Press Enter to continue.
 
 ```bash
 python3 -m apar_router --walkthrough
