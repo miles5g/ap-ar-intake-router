@@ -39,7 +39,7 @@ def wrap_line(text: str, width: int) -> list[str]:
 
 
 def render_box(lines: Sequence[str], width: int = BOX_WIDTH) -> str:
-    """ASCII box with 2–4 short content lines (wrapping if a line runs long)."""
+    """ASCII box with 2-4 short content lines (wrapping if a line runs long)."""
     inner = width - 2
     body_width = inner - 2
     body: list[str] = []
@@ -52,7 +52,7 @@ def render_box(lines: Sequence[str], width: int = BOX_WIDTH) -> str:
 
 def intro_lines() -> list[str]:
     return [
-        "SYNTHETIC DEMO — fake companies, dummy D-#### GLs. Not real books.",
+        "SYNTHETIC DEMO: fake companies, dummy D-#### GLs. Not real books.",
         "One batch goes from invoices in to a journal pack.",
         "All fake data. No live books, no employer SOP.",
     ]
@@ -62,7 +62,7 @@ def ingest_lines(*, documents: Sequence[SourceDocument], **_: object) -> list[st
     remits = sum(1 for doc in documents if doc.kind is DocKind.REMITTANCE)
     invoices = len(documents) - remits
     return [
-        "INGEST — fake invoices/credits from a CSV, remittances from JSON.",
+        "INGEST: fake invoices/credits from a CSV, remittances from JSON.",
         f"That's {len(documents)} docs: {invoices} invoice/credit rows and {remits} remittances.",
         "Loads the pile so the later stages have something to sort.",
     ]
@@ -79,7 +79,7 @@ def classify_lines(
         1 for _, clf in classified if clf.exception_type is not ExceptionType.NONE
     )
     return [
-        "CLASSIFY — AP vs AR, which company, and did anything look off.",
+        "CLASSIFY: AP vs AR, which company, and did anything look off.",
         f"That's {ap} AP / {ar} AR, {flagged} with a flag (dupes, short-pays, blank entity).",
         "Tags each doc and keeps the messy flags on it.",
     ]
@@ -89,7 +89,7 @@ def route_lines(*, items: Sequence[TriageItem], **_: object) -> list[str]:
     queues = Counter(item.routing.queue for item in items)
     urgent = queues.get(Queue.URGENT_ESCALATION, 0)
     return [
-        "ROUTE — each doc gets a queue and a short reason code.",
+        "ROUTE: each doc gets a queue and a short reason code.",
         f"That's {urgent} that need a person now, {len(items)} items in {len(queues)} queues.",
         "Sorts what needs a human now from what can wait.",
     ]
@@ -97,7 +97,7 @@ def route_lines(*, items: Sequence[TriageItem], **_: object) -> list[str]:
 
 def report_lines(**_: object) -> list[str]:
     return [
-        "REPORT — queues, exceptions, entities, the whole list.",
+        "REPORT: queues, exceptions, entities, the whole list.",
         "Same fake names as the fixtures. Nothing fancy.",
         "Prints the triage summary for this batch.",
     ]
@@ -110,9 +110,9 @@ def journals_lines(
 ) -> list[str]:
     count = len(journals or ())
     return [
-        "JOURNALS — dummy-GL CSVs plus a little recurring-bill list.",
+        "JOURNALS: dummy-GL CSVs plus a little recurring-bill list.",
         f"That's {count} balanced files under output/journals/.",
-        "Journals balance — still not a real post.",
+        "Journals balance: still not a real post.",
     ]
 
 

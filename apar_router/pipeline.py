@@ -1,4 +1,4 @@
-"""End-to-end ingest → classify → route → journal pack pipeline."""
+"""End-to-end ingest -> classify -> route -> journal pack pipeline."""
 
 from __future__ import annotations
 

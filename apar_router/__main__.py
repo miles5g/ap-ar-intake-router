@@ -57,8 +57,8 @@ def build_parser() -> argparse.ArgumentParser:
         "--walkthrough",
         action="store_true",
         help=(
-            "Walkthrough demo: boxed stage banners between ingest → classify → "
-            "route → report → journals (pauses for Enter unless --no-pause)."
+            "Walkthrough demo: boxed stage banners between ingest -> classify -> "
+            "route -> report -> journals (pauses for Enter unless --no-pause)."
         ),
     )
     parser.add_argument(

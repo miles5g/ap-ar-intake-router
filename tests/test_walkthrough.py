@@ -33,8 +33,8 @@ STAGE_MARKERS = ("SYNTHETIC DEMO", "INGEST", "CLASSIFY", "ROUTE", "REPORT", "JOU
 
 class BoxTests(unittest.TestCase):
     def test_render_box_wraps_content(self):
-        text = render_box(["INGEST — hello", "Loads the pile."])
-        self.assertIn("INGEST — hello", text)
+        text = render_box(["INGEST: hello", "Loads the pile."])
+        self.assertIn("INGEST: hello", text)
         self.assertTrue(text.startswith("+"))
         self.assertTrue(text.endswith("+"))
         self.assertEqual(text.count("\n"), 3)
@@ -161,7 +161,7 @@ class WalkthroughCliTests(unittest.TestCase):
             self.assertIn("Tags each doc and keeps the messy flags on it.", banners)
             self.assertIn("Sorts what needs a human now from what can wait.", banners)
             self.assertIn("Prints the triage summary for this batch.", banners)
-            self.assertIn("Journals balance — still not a real post.", banners)
+            self.assertIn("Journals balance: still not a real post.", banners)
             self.assertIn("no employer sop", banners.lower())
             self.assertNotIn("Press Enter", banners)
             self.assertIn("AP/AR Intake Triage Report", completed.stdout)

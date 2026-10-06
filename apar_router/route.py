@@ -16,8 +16,8 @@ from apar_router.models import (
 
 REASON_CODES = {
     ExceptionType.NONE: {
-        Side.AP: ("RC-CLEAN-AP", "Clean AP document — standard process queue."),
-        Side.AR: ("RC-CLEAN-AR", "Clean AR document — standard open-item / cash-app path."),
+        Side.AP: ("RC-CLEAN-AP", "Clean AP document: standard process queue."),
+        Side.AR: ("RC-CLEAN-AR", "Clean AR document: standard open-item / cash-app path."),
     },
     ExceptionType.DUPLICATE_INVOICE: (
         "RC-DUP-INV",
@@ -98,7 +98,7 @@ def route_item(doc: SourceDocument, classification: Classification) -> Routing:
     code, rationale = _reason(classification)
     if queue is Queue.URGENT_ESCALATION and classification.exception_type is not ExceptionType.NONE:
         code = "RC-ESCALATE"
-        rationale = f"Critical urgency — {rationale}"
+        rationale = f"Critical urgency: {rationale}"
     return Routing(queue=queue, reason_code=code, rationale=rationale)
 
 

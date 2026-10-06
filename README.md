@@ -1,59 +1,49 @@
 # AP/AR Intake Router
 
-**30-second demo** (from the repo root; Python 3.10+, stdlib only — no pip install)
+Sorts a pile of incoming invoices, credit memos, and payments across several companies: decides what each one is, who it belongs to, whether something is wrong, and which queue it goes to. Then writes the journals.
 
-```bash
-python3 -m apar_router
-python3 -m unittest discover -s tests -v
-```
+This is a rebuild of an intake workflow I run at work, on fake data so it can be public.
 
-Prints a triage report and writes balanced dummy-GL journals + bill-control CSV under `output/`.
-
-**Stepped walkthrough** — same pipeline, with a short boxed banner before each stage (ingest, classify, route, report, journals). The opening banner says the companies and GLs are fake. Press Enter to continue.
-
-```bash
-python3 -m apar_router --walkthrough
-python3 -m apar_router --walkthrough --no-pause
-```
-
-`--no-pause` skips the Enter prompts (CI / non-interactive). Default mode stays the fast 30-second demo.
-
----
-
-**Portfolio demo** — intake → classify → route → journal pack for multi-entity AP/AR.
-
-Recruiter-safe ops automation pattern. **Not** production software, **not** an ERP connector, **not** trained on real books.
-
-## What it does
-
-1. Ingest synthetic invoices/credits + remittances
-2. Classify AP vs AR, entity, urgency, exceptions
-3. Route to queues with reason codes
-4. Emit a controller-style markdown triage report
-5. Write per-entity journals (`GL Code, Debit, Credit, Description`) with payable/receivable balancers
-6. Emit a lightweight recurring bill-control summary
-
-## Synthetic-data rules
-
-- Fictional entities (Northwind Retail LLC, Cedar Grove Holdings, …)
-- Comic-book people only when needed (Bruce Wayne, not real clients)
-- Dummy GLs (`D-####`), whole dollars only
-- No real emails, firm names, or employer SOP text
-
-## Quickstart
+## Run it (30 seconds)
 
 ```bash
 git clone https://github.com/miles5g/ap-ar-intake-router.git
 cd ap-ar-intake-router
 python3 -m apar_router
-python3 -m apar_router --walkthrough
-python3 -m unittest discover -s tests -v
 ```
 
-## Status
+Python 3.10+. Nothing to install. On Windows use `py -m apar_router`.
 
-Runnable. Tests cover routing, journal balance, scrub guards, and walkthrough `--no-pause`.
+Want each step explained as it runs? `python3 -m apar_router --walkthrough`
 
-## Author
+## What happens
 
-Miles Johnson — [@miles5g](https://github.com/miles5g)
+1. **Ingest.** Loads 25 fake documents: invoices, credit memos, and payment records.
+2. **Classify.** Bill we owe (AP) or money owed to us (AR)? Which company? Anything off, like a duplicate invoice, a missing PO, or a past due date?
+3. **Route.** Sends each document to a queue (urgent, exception, normal processing, cash to apply) with a short reason.
+4. **Report.** Prints a triage report: what is in each queue, dollar totals, and what needs a person.
+5. **Journal.** Writes one balanced journal per company, plus a recurring bill tracker.
+
+## What you get
+
+```
+| Queue                | Count | Face value  |
+| URGENT_ESCALATION    |     2 | $40,500.00  |
+| AP_EXCEPTION         |     6 | $24,435.00  |
+| AR_UNAPPLIED_CASH    |     5 | $34,000.00  |
+| AP_PROCESS           |     5 | $48,480.00  |
+```
+
+Files land in `output/`.
+
+## Tests
+
+```bash
+python3 -m unittest discover -s tests
+```
+
+Covers routing rules, balanced journals, and a check that no real names are in the repo.
+
+## Data
+
+All fake: made-up companies, round dollar amounts, dummy account codes.
