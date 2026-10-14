@@ -6,6 +6,7 @@
   var SLOTS = REQUIRED.concat(OPTIONAL);
   var uploads = {};
   var pack = null;
+  var decisions = {};
 
   var QUEUE_PLAIN = {
     URGENT_ESCALATION: "Needs a person now.",
@@ -169,6 +170,56 @@
       ".";
     root.appendChild(meta);
 
+    var flagged = flaggedItems(result);
+    var review = section("Flagged items");
+    var reviewStatus = document.createElement("p");
+    reviewStatus.id = "review-status";
+    reviewStatus.className = "note";
+    review.appendChild(reviewStatus);
+    if (!flagged.length) {
+      var none = document.createElement("p");
+      none.textContent = "Nothing is flagged.";
+      review.appendChild(none);
+    } else {
+      var flagTable = makeTable(["Doc", "Exception", "Why", "Edit", "Decision"], 0);
+      flagTable.table.className = "wide";
+      flagged.forEach(function (item) {
+        var row = document.createElement("tr");
+        row.appendChild(cell(item.docId, "mono"));
+        row.appendChild(cell(item.exceptionType, "mono"));
+        row.appendChild(cell(item.rationale, "why"));
+        var editCell = document.createElement("td");
+        var input = document.createElement("input");
+        input.type = "text";
+        input.className = "note-input";
+        input.setAttribute("aria-label", "Edit note for " + item.docId);
+        input.placeholder = "Edit note";
+        input.addEventListener("input", function () {
+          if (input.value.trim()) decisions[item.docId] = "edited";
+          else if (decisions[item.docId] === "edited") delete decisions[item.docId];
+          refreshFinal();
+        });
+        editCell.appendChild(input);
+        row.appendChild(editCell);
+        var actionCell = document.createElement("td");
+        var approve = document.createElement("button");
+        approve.type = "button";
+        approve.className = "row-action";
+        approve.textContent = "Approve";
+        approve.addEventListener("click", function () {
+          decisions[item.docId] = "approved";
+          approve.disabled = true;
+          approve.textContent = "Approved";
+          refreshFinal();
+        });
+        actionCell.appendChild(approve);
+        row.appendChild(actionCell);
+        flagTable.body.appendChild(row);
+      });
+      review.appendChild(tableWrap(flagTable.table));
+    }
+    root.appendChild(review);
+
     var queues = section("Queues");
     var queueTable = makeTable(["Queue", "What it is", "Count", "Face value", "Critical/High"], 2);
     result.queues.forEach(function (bucket) {
@@ -227,10 +278,11 @@
     });
     root.appendChild(work);
 
-    var journals = section(
-      "Journals",
-      result.journals.length + " journals, all balanced. Whole dollars, dummy GL codes."
-    );
+    var journals = section("Journals");
+    var journalNote = document.createElement("p");
+    journalNote.id = "journal-note";
+    journalNote.className = "note";
+    journals.appendChild(journalNote);
     var journalTable = makeTable(["Journal", "Entity", "Side", "Lines", "Debit", "Credit", "Balanced"], 3);
     result.journals.forEach(function (journal) {
       var row = document.createElement("tr");
@@ -316,6 +368,45 @@
     });
     entities.appendChild(tableWrap(entityTable.table));
     root.appendChild(entities);
+    refreshFinal();
+  }
+
+  function flaggedItems(result) {
+    var items = [];
+    result.queues.forEach(function (bucket) {
+      bucket.items.forEach(function (item) {
+        if (item.exceptionType !== "NONE") items.push(item);
+      });
+    });
+    return items;
+  }
+
+  function reviewComplete() {
+    if (!pack) return false;
+    return flaggedItems(pack).every(function (item) {
+      return decisions[item.docId];
+    });
+  }
+
+  function refreshFinal() {
+    var ready = reviewComplete();
+    var button = $("download-button");
+    if (button) button.disabled = !ready;
+    var status = $("review-status");
+    if (status && pack) {
+      var remaining = flaggedItems(pack).filter(function (item) {
+        return !decisions[item.docId];
+      }).length;
+      status.textContent = ready
+        ? "A person has approved or edited every flagged item."
+        : remaining + " flagged items still need a person to approve or edit.";
+    }
+    var journalNote = $("journal-note");
+    if (journalNote && pack) {
+      journalNote.textContent = ready
+        ? pack.journals.length + " journals, all balanced. A person reviewed the flags."
+        : "Draft journals. A person approves or edits each flagged item before they are final.";
+    }
   }
 
   function iso(date) {
@@ -346,6 +437,7 @@
       showError(error && error.message ? error.message : "The batch could not be run.");
       return;
     }
+    decisions = {};
     renderPack(pack);
     showScreen("review");
   }
@@ -444,7 +536,7 @@
   }
 
   function downloadPack() {
-    if (!pack) return;
+    if (!pack || !reviewComplete()) return;
     var bytes = buildZip(pack.files);
     var blob = new Blob([bytes], { type: "application/zip" });
     var url = URL.createObjectURL(blob);
@@ -492,6 +584,7 @@
     $("download-button").addEventListener("click", downloadPack);
     $("restart-button").addEventListener("click", function () {
       pack = null;
+      decisions = {};
       showScreen("load");
     });
     refreshLoadButton();

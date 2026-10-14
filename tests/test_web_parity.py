@@ -33,6 +33,13 @@ class WebParityTests(unittest.TestCase):
                 "**[Open the demo](https://miles5g.github.io/ap-ar-intake-router/)**\n"
             )
         )
+        self.assertIn(
+            "This is a public rebuild of the workflow pattern on sample data. "
+            "This GitHub version was not deployed or used at any employer.",
+            readme,
+        )
+        self.assertNotIn("at work", readme.lower())
+        self.assertIn("approves or edits", readme)
 
     def test_pages_workflow_publishes_docs(self):
         workflow = (REPO_ROOT / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")
@@ -41,8 +48,17 @@ class WebParityTests(unittest.TestCase):
 
     def test_demo_page_marks_sample_data(self):
         page = (REPO_ROOT / "docs" / "index.html").read_text(encoding="utf-8")
+        app = (REPO_ROOT / "docs" / "app.js").read_text(encoding="utf-8")
         self.assertIn("Sample data only", page)
+        self.assertIn(
+            "This is a public rebuild of the workflow pattern on sample data. "
+            "This GitHub version was not deployed or used at any employer.",
+            page,
+        )
+        self.assertIn("approves or edits", page)
         self.assertNotIn("Powered by AI", page)
+        self.assertNotIn("LLM", page + app)
+        self.assertNotIn("at work", (page + app).lower())
 
     def test_sample_files_match_fixtures(self):
         sample = REPO_ROOT / "docs" / "sample"

@@ -54,12 +54,18 @@ h1 {
 
 .tagline,
 .sample-note,
+.banner,
 .step,
 .lead,
 .note,
 .meta,
 footer p {
   margin: 0;
+}
+
+.banner {
+  max-width: 46rem;
+  margin-bottom: 20px;
 }
 
 .tagline {
@@ -172,6 +178,35 @@ input[type="date"] {
   background: #8b98a5;
   border-color: #8b98a5;
   cursor: not-allowed;
+}
+
+.row-action,
+.note-input {
+  font: inherit;
+  font-size: 0.875rem;
+}
+
+.row-action {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.row-action:disabled {
+  color: var(--muted);
+  cursor: default;
+}
+
+.note-input {
+  width: 14rem;
+  max-width: 100%;
+  padding: 4px 6px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
 }
 
 .linkish {
