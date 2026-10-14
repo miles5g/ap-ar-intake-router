@@ -1,0 +1,9 @@
+vendor,entity_hint,amount,due_day,cadence,invoice_date,document_ref
+Acme Widgets,Northwind Retail LLC,1000,15,monthly,2026-06-15,INV-AW-0615
+Acme Widgets,Northwind Retail LLC,1000,15,monthly,2026-07-15,INV-AW-0715
+Acme Widgets,Northwind Retail LLC,1000,15,monthly,2026-08-15,INV-AW-0815
+Stark Supplies,Harbor Point Logistics,2500,1,monthly,2026-07-01,INV-SS-0701
+Stark Supplies,Harbor Point Logistics,2500,1,monthly,2026-08-01,INV-SS-0801
+Stark Supplies,Harbor Point Logistics,2500,1,monthly,2026-09-01,INV-SS-0901
+Stark Supplies,Cedar Grove Holdings,800,1,monthly,2026-08-01,INV-SS-CG-0801
+Stark Supplies,Cedar Grove Holdings,800,1,monthly,2026-09-01,INV-SS-CG-0901

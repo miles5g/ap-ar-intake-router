@@ -1,8 +1,10 @@
-# AP/AR Intake Router
+**[Open the demo](https://miles5g.github.io/ap-ar-intake-router/)**
 
 Sorts a pile of incoming invoices, credit memos, and payments across several companies: decides what each one is, who it belongs to, whether something is wrong, and which queue it goes to. Then writes the journals.
 
-This is a rebuild of an intake workflow I run at work, on fake data so it can be public.
+# AP/AR Intake Router
+
+This is a public rebuild of the workflow pattern on sample data. This GitHub version was not deployed or used at any employer.
 
 ## Run it (30 seconds)
 
@@ -21,8 +23,9 @@ Want each step explained as it runs? `python3 -m apar_router --walkthrough`
 1. **Ingest.** Loads 25 fake documents: invoices, credit memos, and payment records.
 2. **Classify.** Bill we owe (AP) or money owed to us (AR)? Which company? Anything off, like a duplicate invoice, a missing PO, or a past due date?
 3. **Route.** Sends each document to a queue (urgent, exception, normal processing, cash to apply) with a short reason.
-4. **Report.** Prints a triage report: what is in each queue, dollar totals, and what needs a person.
-5. **Journal.** Writes one balanced journal per company, plus a recurring bill tracker.
+4. **Review.** The tool flags items, and a person approves or edits them before anything is final. The web demo waits for that review. The command writes the draft pack.
+5. **Report.** Prints a triage report: what is in each queue, dollar totals, and which items are flagged.
+6. **Journal.** Writes one balanced journal per company, plus a recurring bill tracker. The journals are a draft until that review is done.
 
 ## What you get
 
