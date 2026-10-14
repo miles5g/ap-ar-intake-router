@@ -157,6 +157,13 @@ input[type="date"] {
   border-bottom: 1px solid var(--line);
 }
 
+.download-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
 .primary,
 .linkish {
   font: inherit;

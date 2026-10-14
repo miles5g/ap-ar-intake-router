@@ -33,7 +33,7 @@ REASON_CODES = {
     ),
     ExceptionType.UNKNOWN_COUNTERPARTY: (
         "RC-UNKNOWN-CPTY",
-        "Counterparty is not on the synthetic vendor/customer master.",
+        "Counterparty is not on the sample vendor and customer list.",
     ),
     ExceptionType.ENTITY_AMBIGUOUS: (
         "RC-ENTITY-AMBIG",

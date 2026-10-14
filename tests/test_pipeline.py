@@ -168,7 +168,7 @@ class PipelineTests(unittest.TestCase):
         self.assertIn("python3 -m apar_router", completed.stdout)
         self.assertNotIn(str(REPO_ROOT), completed.stdout)
         self.assertIn("under output/", completed.stderr)
-        self.assertNotIn("Gursey", completed.stdout)
+        self.assertNotIn("Sample Firm", completed.stdout)
         for token in ("kpmg", "deloitte", "pwc"):
             self.assertNotIn(token, completed.stdout.lower())
 

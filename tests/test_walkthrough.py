@@ -166,7 +166,7 @@ class WalkthroughCliTests(unittest.TestCase):
             self.assertNotIn("Press Enter", banners)
             self.assertIn("AP/AR Intake Triage Report", completed.stdout)
             self.assertIn("Journal pack", completed.stdout)
-            for token in ("Gursey", "kpmg", "deloitte", "pwc"):
+            for token in ("Sample Firm", "kpmg", "deloitte", "pwc"):
                 self.assertNotIn(token.lower(), (completed.stdout + banners).lower())
             self.assertTrue((output / "journals" / "ENT-NWR_AP.csv").is_file())
 

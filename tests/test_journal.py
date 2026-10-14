@@ -207,11 +207,11 @@ class ScrubGuardTests(unittest.TestCase):
         for token in FORBIDDEN_TOKENS:
             self.assertNotIn(token, lowered)
         self.assertNotIn("@", blob)
-        self.assertNotIn("Gursey", blob)
+        self.assertNotIn("Sample Firm", blob)
 
     def test_scan_text_rejects_production_firm(self):
         with self.assertRaises(SafetyError):
-            scan_text("please forward to Gursey AP", source="unit-test")
+            scan_text("please forward to kpmg AP", source="unit-test")
 
     def test_non_dummy_gl_is_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:

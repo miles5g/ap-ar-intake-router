@@ -7,7 +7,6 @@ from typing import Any
 
 # Real-firm / production tells this demo must never emit.
 FORBIDDEN_TOKENS = (
-    "gursey",
     "kpmg",
     "deloitte",
     "ey.com",

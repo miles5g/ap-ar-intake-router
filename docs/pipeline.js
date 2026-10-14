@@ -9,7 +9,6 @@
   "use strict";
 
   var FORBIDDEN_TOKENS = [
-    "gursey",
     "kpmg",
     "deloitte",
     "ey.com",
@@ -64,7 +63,7 @@
     AMOUNT_VARIANCE: ["RC-AMT-VAR", "Remittance total and applied amount disagree."],
     UNKNOWN_COUNTERPARTY: [
       "RC-UNKNOWN-CPTY",
-      "Counterparty is not on the synthetic vendor/customer master.",
+      "Counterparty is not on the sample vendor and customer list.",
     ],
     ENTITY_AMBIGUOUS: [
       "RC-ENTITY-AMBIG",
