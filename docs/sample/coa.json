@@ -1,0 +1,32 @@
+{
+  "note": "Dummy chart of accounts for the portfolio demo. Not a real firm COA. All codes are D-prefixed.",
+  "accounts": [
+    {"code": "D-1010", "name": "Cash", "type": "asset"},
+    {"code": "D-1200", "name": "Accounts Receivable", "type": "asset"},
+    {"code": "D-2000", "name": "Accounts Payable", "type": "liability"},
+    {"code": "D-4000", "name": "Sales Revenue", "type": "revenue"},
+    {"code": "D-6100", "name": "Office Supplies Expense", "type": "expense"},
+    {"code": "D-6200", "name": "Freight Expense", "type": "expense"},
+    {"code": "D-6300", "name": "Utilities Expense", "type": "expense"},
+    {"code": "D-6400", "name": "Facilities Expense", "type": "expense"},
+    {"code": "D-6500", "name": "Packaging Expense", "type": "expense"},
+    {"code": "D-6600", "name": "Unclassified Expense", "type": "expense"},
+    {"code": "D-6700", "name": "Widget Materials Expense", "type": "expense"},
+    {"code": "D-6800", "name": "Warehouse Supplies Expense", "type": "expense"}
+  ],
+  "control_accounts": {
+    "AP": "D-2000",
+    "AR": "D-1200"
+  },
+  "vendor_gl": {
+    "Pinecone Office Supply Co.": "D-6100",
+    "Atlas Freight Partners": "D-6200",
+    "Silver Oak Utilities": "D-6300",
+    "Redwood Facilities Group": "D-6400",
+    "Horizon Packaging Inc.": "D-6500",
+    "Acme Widgets": "D-6700",
+    "Stark Supplies": "D-6800"
+  },
+  "customer_gl": "D-4000",
+  "fallback_expense_gl": "D-6600"
+}

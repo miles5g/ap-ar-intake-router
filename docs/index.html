@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AP/AR Intake</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <div>
+        <h1>AP/AR Intake</h1>
+        <p class="tagline">Sort a batch into queues and journals.</p>
+      </div>
+      <p class="sample-note">Sample data only</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <p id="error" class="error" role="alert" hidden></p>
+
+    <section id="screen-load">
+      <p class="step">Step 1 of 3</p>
+      <p class="lead">Load the sample batch, or upload files in the same format.</p>
+      <p class="note">Sample data only. Do not upload real client files.</p>
+      <fieldset class="choice">
+        <legend class="sr-only">Where the batch comes from</legend>
+        <label class="choice-row">
+          <input type="radio" name="source" value="sample" checked>
+          <span>Sample batch</span>
+        </label>
+        <label class="choice-row">
+          <input type="radio" name="source" value="upload">
+          <span>Upload files</span>
+        </label>
+      </fieldset>
+      <div id="upload-fields" class="file-grid" hidden>
+        <label class="file-row"><span>entities.json</span> <input type="file" accept=".json,application/json" data-slot="entities.json"></label>
+        <label class="file-row"><span>invoices.csv</span> <input type="file" accept=".csv,text/csv" data-slot="invoices.csv"></label>
+        <label class="file-row"><span>remittances.json</span> <input type="file" accept=".json,application/json" data-slot="remittances.json"></label>
+        <label class="file-row"><span>coa.json</span> <input type="file" accept=".json,application/json" data-slot="coa.json"></label>
+        <label class="file-row"><span>recurring_bills.csv <span class="optional">(optional)</span></span> <input type="file" accept=".csv,text/csv" data-slot="recurring_bills.csv"></label>
+      </div>
+      <div class="actions">
+        <button type="button" id="load-button" class="primary">Load sample batch</button>
+      </div>
+    </section>
+
+    <section id="screen-run" hidden>
+      <p class="step">Step 2 of 3</p>
+      <p class="lead">Run the batch to classify each document, assign a queue, and write the journals.</p>
+      <ul id="loaded-files" class="loaded"></ul>
+      <label class="date-field">
+        <span>As-of date</span>
+        <input id="as-of" type="date" value="2026-09-11">
+      </label>
+      <div class="actions">
+        <button type="button" id="run-button" class="primary">Run</button>
+        <button type="button" id="back-button" class="linkish">Back</button>
+      </div>
+    </section>
+
+    <section id="screen-review" hidden>
+      <p class="step">Step 3 of 3</p>
+      <p class="lead">Review the queues and journals, then download the files.</p>
+      <div class="action-bar">
+        <button type="button" id="download-button" class="primary">Download pack</button>
+        <button type="button" id="restart-button" class="linkish">Start over</button>
+      </div>
+      <div id="results"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Fictional companies and amounts. This does not post to a live ledger.</p>
+    </div>
+  </footer>
+
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+  <noscript><p class="wrap">This page needs JavaScript to run the batch in the browser.</p></noscript>
+  <script src="pipeline.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

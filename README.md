@@ -1,6 +1,8 @@
-# AP/AR Intake Router
+**[Open the demo](https://miles5g.github.io/ap-ar-intake-router/)**
 
 Sorts a pile of incoming invoices, credit memos, and payments across several companies: decides what each one is, who it belongs to, whether something is wrong, and which queue it goes to. Then writes the journals.
+
+# AP/AR Intake Router
 
 This is a rebuild of an intake workflow I run at work, on fake data so it can be public.
 
